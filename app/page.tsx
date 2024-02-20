@@ -1,6 +1,8 @@
 import { allPosts } from "@/.contentlayer/generated";
 import Link from "next/link";
 import { format } from "date-fns";
+import papers from './papers.json';
+
 
 import React from "react";
 
@@ -14,20 +16,24 @@ const PostLink = ({ post }) => (
     </Link>
 );
 
-const Home = () => {
-    const filteredPosts = allPosts.filter((post) => !post.draft);
+const isExternalLink = (url) => /^https?:\/\//.test(url);
 
+const Home = () => {
     return (
-        <section className="group/section">
-            <div className="group-hover/section:text-gray">
-                {filteredPosts
-                    .sort((a, b) => b.date.localeCompare(a.date))
-                    .map((post) => (
-                        <PostLink post={post} key={post._id} />
-                    ))}
-            </div>
-        </section>
+      <div>
+        {papers.filter(paper => isExternalLink(paper.url)).map((paper) => (
+          <a
+            className="pb-4 flex hover:underline"
+            href={paper.url}
+            key={paper.slug}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <h1 className="overflow-hidden whitespace-nowrap overflow-ellipsis">{link.title}</h1>
+          </a>
+        ))}
+      </div>
     );
-};
+  };
 
 export default Home;
