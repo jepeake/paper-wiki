@@ -2,6 +2,7 @@ import { allLinks } from "@/.contentlayer/generated";
 import { Metadata } from "next";
 import Link from "next/link";
 import React from "react";
+import links from './links.json';
 
 export const metadata: Metadata = {
     title: "Links",
