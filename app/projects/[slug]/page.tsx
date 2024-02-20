@@ -1,4 +1,4 @@
-import { allProjects } from "@/.contentlayer/generated";
+import { allLinks } from "@/.contentlayer/generated";
 import { notFound } from "next/navigation";
 import { MdxRenderer } from "@/app/components/Mdx";
 
@@ -8,12 +8,12 @@ import CONFIG from "@/blog.config";
 export async function generateMetadata({
   params,
 }): Promise<Metadata | undefined> {
-  const project = allProjects.find((post) => post.slug === params.slug);
+  const link = allLinks.find((post) => post.slug === params.slug);
 
-  if (!project) {
+  if (!link) {
     return;
   }
-  const { title, slug } = project;
+  const { title, slug } = link;
 
   return {
     title,
@@ -30,17 +30,17 @@ export async function generateMetadata({
 }
 
 export default function Post({ params }) {
-  const project = allProjects.find((post) => post.slug === params.slug);
+  const link = allLinks.find((post) => post.slug === params.slug);
 
-  if (!project) {
+  if (!link) {
     notFound();
   }
 
   return (
     <section>
-      <h1 className="text-2xl font-bold">{project.title}</h1>
+      <h1 className="text-2xl font-bold">{link.title}</h1>
       <article className="mt-10 prose prose-invert">
-        <MdxRenderer source={project.body.code} />
+        <MdxRenderer source={link.body.code} />
       </article>
     </section>
   );

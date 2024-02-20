@@ -46,9 +46,9 @@ export const About = defineDocumentType(() => ({
     },
 }));
 
-export const Projects = defineDocumentType(() => ({
-    name: "Projects",
-    filePathPattern: `projects/*.mdx`,
+export const Links = defineDocumentType(() => ({
+    name: "Links",
+    filePathPattern: `links/*.mdx`,
     contentType: "mdx",
     fields: {
         title: { type: "string", required: true },
@@ -56,17 +56,17 @@ export const Projects = defineDocumentType(() => ({
     computedFields: {
         slug: {
             type: "string",
-            resolve: (project) => {
-                const parts = project._raw.flattenedPath.split("/");
+            resolve: (link) => {
+                const parts = link._raw.flattenedPath.split("/");
                 return parts[parts.length - 1];
             },
         },
         url: {
             type: "string",
-            resolve: (project) => {
-                const parts = project._raw.flattenedPath.split("/");
+            resolve: (link) => {
+                const parts = link._raw.flattenedPath.split("/");
                 const slug = parts[parts.length - 1];
-                return `/projects/${slug}`;
+                return `/links/${slug}`;
             },
         },
     },
@@ -74,7 +74,7 @@ export const Projects = defineDocumentType(() => ({
 
 export default makeSource({
     contentDirPath: "content",
-    documentTypes: [Post, About, Projects],
+    documentTypes: [Post, About, Links],
     mdx: {
         remarkPlugins: [remarkGfm, remarkMath],
         rehypePlugins: [[rehypeKatex, { output: "mathml" }]],
