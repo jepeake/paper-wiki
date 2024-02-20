@@ -30,7 +30,6 @@ const Home = () => {
             rel="noopener noreferrer"
           >
             <h1 className="overflow-hidden whitespace-nowrap overflow-ellipsis">{paper.title}</h1>
-            <span className="ml-4 font-light text-gray group-hover/item:text-white">{format(new Date(paper.date), "dd/MM/yy")}</span>
           </a>
         ))}
       </div>
