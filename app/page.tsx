@@ -29,7 +29,7 @@ const Home = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <h1 className="overflow-hidden whitespace-nowrap overflow-ellipsis">{link.title}</h1>
+            <h1 className="overflow-hidden whitespace-nowrap overflow-ellipsis">{paper.title}</h1>
           </a>
         ))}
       </div>
