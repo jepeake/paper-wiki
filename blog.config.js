@@ -1,7 +1,7 @@
 const CONFIG = {
-    title: "Lotse",
+    title: "Papers",
     baseURL: "https://lotse.vercel.app",
-    darkBackground: "#1a1a1a",
+    darkBackground: "#f5f2e9",
 };
 
 module.exports = CONFIG;
