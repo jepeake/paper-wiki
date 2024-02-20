@@ -12,6 +12,7 @@ export const Post = defineDocumentType(() => ({
         title: { type: "string", required: true },
         date: { type: "string", required: true },
         draft: { type: "boolean", required: true },
+        url: { type: "string", required: false }
     },
     computedFields: {
         slug: {
@@ -24,9 +25,7 @@ export const Post = defineDocumentType(() => ({
         url: {
             type: "string",
             resolve: (post) => {
-                const parts = post._raw.flattenedPath.split("/");
-                const slug = parts[parts.length - 1];
-                return `/${slug}`;
+                return post.url || `/${post.slug}`;;
             },
         },
         readingTime: {

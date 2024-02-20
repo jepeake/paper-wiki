@@ -8,15 +8,36 @@ export const metadata: Metadata = {
     description: "",
 };
 
+const isExternalLink = (url) => /^https?:\/\//.test(url);
+
 const Page = () => {
     return (
         <>
-            {allLinks.map((link) => (
-                // Using an <a> tag instead of Link component for external URLs
-                <a className={"pb-4 flex"} href={link.url} key={link.slug} target="_blank" rel="noopener noreferrer">
-                    <h1 className="overflow-hidden whitespace-nowrap overflow-ellipsis hover:underline">{link.title}</h1>
-                </a>
-            ))}
+            {allLinks.map((link) => {
+                if (isExternalLink(link.url)) {
+                    // Render an <a> tag for external URLs
+                    return (
+                        <a
+                            className="pb-4 flex hover:underline"
+                            href={link.url}
+                            key={link.slug}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <h1 className="overflow-hidden whitespace-nowrap overflow-ellipsis">{link.title}</h1>
+                        </a>
+                    );
+                } else {
+                    // Render a Next.js Link component for internal navigation
+                    return (
+                        <Link href={link.url} key={link.slug}>
+                            <a className="pb-4 flex hover:underline">
+                                <h1 className="overflow-hidden whitespace-nowrap overflow-ellipsis">{link.title}</h1>
+                            </a>
+                        </Link>
+                    );
+                }
+            })}
         </>
     );
 };
